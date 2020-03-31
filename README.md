@@ -1,2 +1,15 @@
-# umi_project
-前端自定义架构
+# umi project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```
