@@ -1,18 +1,23 @@
 import React from 'react';
 import { urls, services } from '../api';
+import { connect } from 'dva';
 import styles from './index.less';
-export default class Page extends React.Component {
+class Page extends React.Component {
   componentDidMount() {
-    services.post(
-      urls.copyIntent,
-      {},
-      data => {
-        console.log('data', data);
-      },
-      error => {
-        console.log('data', error);
-      },
-    );
+    this.props.dispatch({
+      type: 'pages/fetch',
+      payload: {},
+    });
+    // services.post(
+    //   urls.copyIntent,
+    //   {},
+    //   data => {
+    //     console.log('data', data);
+    //   },
+    //   error => {
+    //     console.log('data', error);
+    //   },
+    // );
   }
   render() {
     return (
@@ -22,3 +27,12 @@ export default class Page extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { data } = state.pages;
+  return {
+    data,
+  };
+}
+
+export default connect(mapStateToProps)(Page);

@@ -39,7 +39,6 @@ const request = (config, resolve, reject) => {
     'Content-type': 'application/json; charset=utf-8',
     ...newConfig.headers,
   };
-  newConfig.withCredentials = false;
   axios
     .request(newConfig)
     .then(checkStatus)
@@ -100,7 +99,9 @@ export default {
       reject,
     );
   },
-  request: (config, resolve, reject) => {
-    request(config, resolve, reject);
+  request: config => {
+    axios.request(config).then(response => {
+      console.log('response', response);
+    });
   },
 };

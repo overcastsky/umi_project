@@ -4,6 +4,7 @@ import routes from './config/config.router';
 export default defineConfig({
   routes,
   antd: {},
+  dva: {},
   history: {
     type: 'hash',
   },
