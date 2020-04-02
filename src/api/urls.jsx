@@ -3,7 +3,7 @@ import UrlModules from './reducerUrls';
 function initHostName() {
   if (_DEV_) {
     return {
-      domainName: 'http://localhost:8000/',
+      domainName: '',
       suffix: '',
     };
   }

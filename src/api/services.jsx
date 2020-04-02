@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetch } from 'dva';
 import { isObject } from '../../utils/utils';
 import { message } from 'antd';
 
@@ -99,9 +100,11 @@ export default {
       reject,
     );
   },
-  request: config => {
-    axios.request(config).then(response => {
-      console.log('response', response);
-    });
+  request: async function request(url, options) {
+    const response = await fetch(url, options);
+    checkStatus(response);
+    const data = await response.json();
+    const ret = data.data;
+    return ret;
   },
 };

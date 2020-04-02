@@ -30,6 +30,7 @@ class Page extends React.Component {
 
 function mapStateToProps(state) {
   const { data } = state.pages;
+  console.log('mapStateToProps', data);
   return {
     data,
   };
