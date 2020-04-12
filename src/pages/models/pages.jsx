@@ -13,7 +13,6 @@ export default {
   effects: {
     *fetch({ payload }, { call, put }) {
       const { data } = yield call(pageServices.fetch, { ...payload });
-      console.log('=====', data);
       yield put({
         type: 'save',
         payload: {

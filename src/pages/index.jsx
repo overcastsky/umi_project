@@ -1,6 +1,7 @@
 import React from 'react';
 import { urls, services } from '../api';
 import { connect } from 'dva';
+import { CustomizeUpload } from '../components';
 import styles from './index.less';
 class Page extends React.Component {
   componentDidMount() {
@@ -20,9 +21,13 @@ class Page extends React.Component {
     // );
   }
   render() {
+    const propsConfig = {
+      critical: 300,
+      showNum: -1,
+    };
     return (
-      <div>
-        <h1 className={styles.title}>Page index</h1>
+      <div style={{ width: '100%' }}>
+        <CustomizeUpload {...propsConfig} />
       </div>
     );
   }
@@ -30,7 +35,6 @@ class Page extends React.Component {
 
 function mapStateToProps(state) {
   const { data } = state.pages;
-  console.log('mapStateToProps', data);
   return {
     data,
   };
