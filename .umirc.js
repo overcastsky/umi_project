@@ -10,7 +10,6 @@ export default defineConfig({
   },
   define: {
     _DEV_: (process.env.NODE_ENV || 'development') === 'development',
-    _TEST_: (process.env.NODE_ENV || 'TEST') === 'TEST',
     _PRD_: (process.env.NODE_ENV || 'production') === 'production',
   },
 });

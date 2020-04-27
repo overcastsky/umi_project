@@ -13,12 +13,6 @@ function initHostName() {
       suffix: '',
     };
   }
-  if (_TEST_) {
-    return {
-      domainName: '测试',
-      suffix: '',
-    };
-  }
 }
 
 // 初始化域名

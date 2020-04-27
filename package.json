@@ -29,5 +29,8 @@
     "react-dom": "^16.12.0",
     "umi": "^3.0.16",
     "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
