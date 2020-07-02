@@ -19,6 +19,7 @@
     ]
   },
   "dependencies": {
+    "@ant-design/charts": "^0.9.6",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.16",
     "axios": "^0.19.2",

@@ -1,5 +1,6 @@
 import { urls, services } from '../../api';
 
 export function fetch() {
-  return services.request(urls.copyIntent, { method: 'POST' });
+  console.log('urls', urls);
+  return services.request('/app/orgIntent/copyIntent', { method: 'POST' });
 }
