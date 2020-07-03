@@ -10,6 +10,7 @@ import {
   GroupedBar,
   StackedBar,
   ColumnLine,
+  StackedColumnLine,
 } from '@ant-design/charts';
 import { ChartsConfig } from '../config';
 import { isEmptyData } from '../../../../utils/utils';
@@ -56,6 +57,9 @@ class SelfColumn extends React.Component {
         break;
       case 'ColumnLine':
         charts = <ColumnLine {...this.renderCharts('chartResource')} />;
+        break;
+      case 'StackedColumnLine':
+        charts = <StackedColumnLine {...this.renderCharts('chartResource')} />;
         break;
     }
     return charts;
