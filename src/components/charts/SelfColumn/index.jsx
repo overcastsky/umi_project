@@ -1,77 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Column,
-  RangeColumn,
-  GroupedColumn,
-  StackedColumn,
-  PercentStackedColumn,
-  Line,
-  Bar,
-  GroupedBar,
-  StackedBar,
-  ColumnLine,
-  StackedColumnLine,
+  Column, // 柱状图
+  Line, // 折线图
+  Bar, // 条形图
+  Area, // 面积图
+  Pie, // 饼图
+  DualAxes, // 混合图
 } from '@ant-design/charts';
 import { ChartsConfig } from '../config';
 import { isEmptyData } from '../../../../utils/utils';
 import { SelfEmpty } from '../../index';
 
-class SelfColumn extends React.Component {
-  renderCharts = type => {
-    const { data = [], xField, yField, meta = {}, customerOption } = this.props;
+function SelfColumn(props) {
+  // 渲染图表
+  function renderCharts(type) {
+    const { data = [], xField, yField, meta = {}, customerOption = {} } = props;
     return {
       ...ChartsConfig({ data, xField, yField, meta, customerOption })[type],
     };
-  };
-  ColumnType = chartsType => {
+  }
+
+  function ColumnType(chartsType) {
     let charts = null;
     switch (chartsType) {
       case 'column':
-        charts = <Column {...this.renderCharts('chartResource')} />;
-        break;
-      case 'RangeColumn':
-        charts = <RangeColumn {...this.renderCharts('chartResource')} />;
-        break;
-      case 'GroupedColumn':
-        charts = <GroupedColumn {...this.renderCharts('chartResource')} />;
-        break;
-      case 'StackedColumn':
-        charts = <StackedColumn {...this.renderCharts('chartResource')} />;
-        break;
-      case 'PercentStackedColumn':
-        charts = (
-          <PercentStackedColumn {...this.renderCharts('chartResource')} />
-        );
+        charts = <Column {...renderCharts('chartResource')} />;
         break;
       case 'Line':
-        charts = <Line {...this.renderCharts('chartResource')} />;
+        charts = <Line {...renderCharts('chartResource')} />;
         break;
       case 'Bar':
-        charts = <Bar {...this.renderCharts('chartResource')} />;
+        charts = <Bar {...renderCharts('chartResource')} />;
         break;
-      case 'GroupedBar':
-        charts = <GroupedBar {...this.renderCharts('chartResource')} />;
-        break;
-      case 'StackedBar':
-        charts = <StackedBar {...this.renderCharts('chartResource')} />;
-        break;
-      case 'ColumnLine':
-        charts = <ColumnLine {...this.renderCharts('chartResource')} />;
-        break;
-      case 'StackedColumnLine':
-        charts = <StackedColumnLine {...this.renderCharts('chartResource')} />;
+      case 'DualAxes':
+        charts = <DualAxes {...renderCharts('chartResource')} />;
         break;
     }
     return charts;
-  };
-  render() {
-    const { chartsType, height = 400, data, id } = this.props;
-    return (
-      <div style={{ width: '100%', height }} id={id}>
-        {!isEmptyData(data) ? this.ColumnType(chartsType) : <SelfEmpty />}
-      </div>
-    );
   }
+  const { width = '100%', height = 400, id, data, chartsType } = props;
+  return (
+    <div style={{ width, height }} id={id}>
+      {isEmptyData(data) ? <SelfEmpty /> : ColumnType(chartsType)}
+    </div>
+  );
 }
 
 export default SelfColumn;

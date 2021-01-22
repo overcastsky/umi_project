@@ -1,64 +1,43 @@
-// import React from 'react';
-// import { urls, services } from '../api';
-// import { connect } from 'dva';
-// import { CustomizeUpload } from '../components';
-// import styles from './index.less';
-// class Page extends React.Component {
-//   // componentDidMount() {
-//   //   this.props.dispatch({
-//   //     type: 'pages/fetch',
-//   //     payload: {},
-//   //   });
-//     // services.post(
-//     //   urls.copyIntent,
-//     //   {},
-//     //   data => {
-//     //     console.log('data', data);
-//     //   },
-//     //   error => {
-//     //     console.log('data', error);
-//     //   },
-//     // );
-//   // }
-//   render() {
-//     const propsConfig = {
-//       critical: 300,
-//       showNum: -1,
-//     };
-//     return (
-//       <div style={{ width: '100%' }}>
-//         <CustomizeUpload {...propsConfig} />
-//       </div>
-//     );
-//   }
-// }
-
-// function mapStateToProps(state) {
-//   const { data } = state.pages;
-//   return {
-//     data,
-//   };
-// }
-
-// export default connect(mapStateToProps)(Page);
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { urls, services } from '../api';
-import { connect } from 'dva';
 import { SelfColumn } from '../components';
-import ChartsDemo from './container/chartsDemo';
 import styles from './index.less';
-class Page extends React.Component {
-  render() {
-    return <ChartsDemo />;
-  }
-}
-
-function mapStateToProps(state) {
-  const { data } = state.pages;
-  return {
-    data,
+function Page() {
+  const [dataSource, setDataSource] = useState(null);
+  useEffect(() => {
+    services.post(
+      urls.copyIntent,
+      {},
+      data => {
+        setDataSource(data);
+      },
+      error => {},
+    );
+  }, []);
+  const config = {
+    data: dataSource ? [dataSource, dataSource] : [],
+    chartsType: 'DualAxes',
+    xField: 'time',
+    yField: ['value', 'count'],
+    meta: {
+      time: { alias: '年份' },
+      value: { alias: '百分点' },
+      count: { alias: '值' },
+    },
+    customerOption: {
+      geometryOptions: [
+        {
+          geometry: 'column',
+          columnWidthRatio: 0.2,
+        },
+        {
+          geometry: 'line',
+          lineStyle: { lineWidth: 2 },
+        },
+      ],
+    },
   };
+  return <SelfColumn id="demo" {...config} />;
 }
 
-export default connect(mapStateToProps)(Page);
+export default Page;
