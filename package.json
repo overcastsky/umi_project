@@ -1,8 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
-    "build": "umi build",
+    "start:dev": "cross-env UMI_ENV=dev umi dev",
+    "build:test": "cross-env UMI_ENV=test umi build",
+    "build:prod": "cross-env UMI_ENV=prod umi build",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@ant-design/charts": "^1.0.14",
+    "@svgr/webpack": "^5.5.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.16",
     "axios": "^0.19.2",
@@ -32,6 +34,6 @@
     "yorkie": "^2.0.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.3"
   }
 }
