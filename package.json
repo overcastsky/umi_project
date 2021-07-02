@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start:dev": "cross-env UMI_ENV=dev umi dev",
+    "start": "cross-env umi dev",
     "build:test": "cross-env UMI_ENV=test umi build",
     "build:prod": "cross-env UMI_ENV=prod umi build",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -24,9 +24,13 @@
     "@svgr/webpack": "^5.5.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.16",
+    "ahooks": "^2.10.6",
+    "antd": "^4.16.5",
     "axios": "^0.19.2",
     "jquery": "^3.4.1",
     "lint-staged": "^10.0.7",
+    "lodash": "^4.17.21",
+    "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
