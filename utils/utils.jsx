@@ -149,6 +149,18 @@ function parseQueryString(url) {
   return query;
 }
 
+// 获取浏览器域名
+function getDomain(url) {
+  let newUrl = url ? url : window.location.href;
+  let domain = newUrl.split('/');
+  if (domain[2]) {
+    domain = domain[2];
+  } else {
+    domain = '';
+  }
+  return domain;
+}
+
 export {
   isObject,
   isArray,
@@ -163,4 +175,5 @@ export {
   Trim,
   disposeDate,
   parseQueryString,
+  getDomain,
 };
