@@ -10,26 +10,23 @@ import './index.less';
 
 class SearchItem extends Component {
   render() {
-    const { component: Component, ...rest } = this.props;
-    return <Component {...rest} />;
+    const { component: Component, ...reset } = this.props;
+    return <Component {...reset} />;
   }
 }
 
 let searchValues = {};
 
 function AdvancedSearchForm(props) {
+  const [form] = Form.useForm();
   let rowCount = 1;
   const { SelectQueryParams } = props;
-  const [form] = Form.useForm();
   const [type, setType] = useState(props.type); // 搜索类型
   const [expand, setExpand] = useState(!!props.expand || false); // 默认收起
   const [loading, setLoading] = useState(props.loading || false); // 节流阀
   const [list, setList] = useState(searchItem[props.type] || []); // 查询子项
   const [colNum, setColNum] = useState(props.colNum || 3);
   const [span, setSpan] = useState(props.span || 8);
-  const [isSubmitChangeLine, setIsSubmitChangeLine] = useState(
-    props.isSubmitChangeLine || false,
-  ); //操作按钮是否需要换行
 
   useEffect(() => {
     setLoading(props.loading);
@@ -46,18 +43,12 @@ function AdvancedSearchForm(props) {
     },
   );
 
-  // 重置
-  const { run: handleReset } = useDebounceFn(
-    () => {
-      const { onReset } = props;
-      form.resetFields();
-      let value = formatData(form.getFieldsValue());
-      onReset && onReset(value);
-    },
-    {
-      wait: 500,
-    },
-  );
+  const handleReset = () => {
+    const { onReset } = props;
+    let value = formatData(form.getFieldsValue());
+    form.resetFields();
+    onReset && onReset(value);
+  };
 
   // 展开收起
   const toggle = () => {
@@ -80,7 +71,7 @@ function AdvancedSearchForm(props) {
 
   // 处理表单子项
   const getFields = () => {
-    const { config = {}, commonParams, validateList = {}, ...rest } = props;
+    const { config = {}, commonParams, validateList = {}, ...reset } = props;
     const colSpan = toInteger(24 / colNum);
     const labelCol = 6 - (3 - colNum) * 2;
     const wrapperCol = 24 - labelCol;
@@ -125,13 +116,14 @@ function AdvancedSearchForm(props) {
           className="search_item"
         >
           <Form.Item
-            labelCol={{ span: 3 }}
+            {...layout}
+            // labelCol={{ span: 3 }}
             label={item.label}
             colon={false}
             name={item.key}
             {...(item.decoratorOption || validateFn)}
           >
-            <SearchItem component={item.content} {...newProps} {...rest} />
+            <SearchItem component={item.content} {...newProps} {...reset} />
           </Form.Item>
         </Col>,
       );
@@ -166,12 +158,18 @@ function AdvancedSearchForm(props) {
         className="re-btn"
         span={len >= 4 ? 24 : colSpan}
         style={{ textAlign: 'right' }}
+        key="re-btn"
       >
         <Space style={{ marginBottom: 10 }}>
-          <Button type="default" onClick={handleReset}>
+          <Button type="default" key="handleReset" onClick={handleReset}>
             重置
           </Button>
-          <Button type="primary" loading={loading} htmlType="submit">
+          <Button
+            type="primary"
+            loading={loading}
+            key="submit"
+            htmlType="submit"
+          >
             查询
           </Button>
           {rowCount >= 1 && list.length > 3 && (
@@ -189,7 +187,7 @@ function AdvancedSearchForm(props) {
     <Form
       labelAlign="left"
       className="m-search"
-      from={form}
+      form={form}
       onFinish={run}
       onValuesChange={(changeValues, allValues) => {
         searchValues = allValues;

@@ -125,7 +125,7 @@ function SelfSelect(props) {
         (!isEmptyData(list) &&
           list.map(item => (
             <Option
-              key={item[fieldNames.name || 'name']}
+              key={item[fieldNames.id || 'id']}
               value={item[fieldNames.id || 'id']}
               title={item[fieldNames.name || 'name']}
             >

@@ -49,8 +49,8 @@ let UploadBy = {
 export const formatData = data => {
   if (has(data, 'lastModifiedDate')) {
     if (!isEmptyArr(data.lastModifiedDate)) {
-      data.startTime = moment(data.lastModifiedDate[0].format('YYYY-MM-DD'));
-      data.endTime = moment(data.lastModifiedDate[1].format('YYYY-MM-DD'));
+      data.startTime = moment(data.lastModifiedDate[0]).format('YYYY-MM-DD');
+      data.endTime = moment(data.lastModifiedDate[1]).format('YYYY-MM-DD');
       delete data.lastModifiedDate;
     } else {
       data.startTime = '';

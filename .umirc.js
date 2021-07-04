@@ -23,7 +23,7 @@ export default defineConfig({
   define: {
     _DEV_: (process.env.UMI_ENV || 'dev') === 'dev',
     _TEST_: (process.env.UMI_ENV || 'test') === 'test',
-    _PRD_: (process.env.UMI_ENV || 'prod') === 'prod',
+    _PROD_: (process.env.UMI_ENV || 'prod') === 'prod',
   },
   extraPostCSSPlugins: [
     require('postcss-px-to-viewport')({
